@@ -2,13 +2,14 @@
 
 @implementation TCInstapaper
 
-@synthesize delegate, isAuthenticated;
+@synthesize delegate, isAuthenticated, secure;
 
 - (id)init
 {
 	self = [super init];
 	if (self != nil) {
 		isAuthenticated = NO;
+		secure = YES;
 	}
 	return self;
 }
@@ -35,7 +36,8 @@
 	//NSLog(@"*** TCInstapaper: %@",[requestString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]);
 	
 	NSData *requestData = [NSData dataWithBytes:[requestString UTF8String] length:[requestString length]];
-	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://www.instapaper.com/api/authenticate"]];
+	NSString *secureHTTP = (self.secure)?(@"https"):(@"http");
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@://www.instapaper.com/api/authenticate",secureHTTP]]];
 	[request setHTTPBody:requestData];
 	[request setHTTPMethod:@"POST"];
 	[request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];
@@ -53,7 +55,8 @@
 	}
 	
 	NSData *requestData = [NSData dataWithBytes:[requestString UTF8String] length:[requestString length]];
-	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://www.instapaper.com/api/add"]];
+	NSString *secureHTTP = (self.secure)?(@"https"):(@"http");
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@://www.instapaper.com/api/add",secureHTTP]]];
 	[request setHTTPBody:requestData];
 	[request setHTTPMethod:@"POST"];
 	[request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];

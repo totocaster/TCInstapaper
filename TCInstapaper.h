@@ -3,9 +3,7 @@
 @class TCInstapaper;
 
 @protocol TCInstapaperDelegate <NSObject>
-
 - (void)instapaper:(TCInstapaper *)instapaper didDidFinishRequestWithCode:(NSUInteger)code;
-
 @end
 
 @interface TCInstapaper : NSObject {
@@ -13,6 +11,7 @@
 	NSString *_password;
 	
 	BOOL isAuthenticated;
+	BOOL secure;
 	
 	id<TCInstapaperDelegate> delegate;
 	
@@ -23,6 +22,7 @@
 }
 
 @property (readonly) BOOL isAuthenticated;
+@property (readwrite) BOOL secure;
 @property (retain,readwrite) id<TCInstapaperDelegate> delegate;
 
 - (id)initWithUsername:(NSString *)username;
@@ -32,5 +32,6 @@
 
 - (void)addURLString:(NSString *)urlString title:(NSString *)title;
 - (void)addURLString:(NSString *)urlString;
+
 
 @end
