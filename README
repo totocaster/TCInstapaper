@@ -1,26 +1,30 @@
 TCInstapaper.h is a very small, light and super easy to use Instapaper Objective-C wrapper for iOS and Mac OS (last one is not tested tho).
 
 Usage
------
+=====
 
 Simply make reference to files from your Xcode project, include "TCInstapaper.h" where necessary and start using.
 
-`TCInstapaper *ip = [[TCInstapaper alloc] initWithUsername:@"username" andPassword:@"password"];
-ip.delegate = self;`
+TCInstapaper *ip = [[TCInstapaper alloc] initWithUsername:@"username" andPassword:@"password"];
+ip.delegate = self;
 
-You can pass `nil` instead of password if your your Instapaper account has not got one.
+You can pass nil instead of password if your your Instapaper account has not got one.
 
 Two basic methods provide your functionality:
 
-`[ip authenticate];` will make authentication request check weather you've provided correct username and password.
+[ip authenticate] will make authentication request check weather you've provided correct username and password.
 
-`[ip addURLString:@"http://140plus.totocaster.com"];` or `[ip addURLString:@"http://140plus.totocaster.com" title:@"My Website"];` will add your link to Instapaper with your automatically detected web-site name or your own custom one.
+[ip addURLString:@"http://140plus.totocaster.com"];
+[ip addURLString:@"http://140plus.totocaster.com" title:@"My Website"]; 
 
-All API calls will invoke delegate method 
-`- (void)instapaper:(TCInstapaper *)instapaper didDidFinishRequestWithCode:(NSUInteger)code;`
+Both will add your link to Instapaper with your automatically detected web-site name or your own custom one.
 
-`(TCInstapaper *)instapaper` is object which called delegate
-`(NSUInteger)code` is a HTTP status code from Instapaper.
+All API calls will invoke delegate method: 
+
+- (void)instapaper:(TCInstapaper *)instapaper didDidFinishRequestWithCode:(NSUInteger)code;
+
+(TCInstapaper *)instapaper - is object which called delegate
+(NSUInteger)code – is a HTTP status code from Instapaper.
 
 Instapaper HTTP status codes:
 200 - Authentication OK
@@ -30,6 +34,6 @@ Instapaper HTTP status codes:
 500 - The service encountered an error. Please try again later.
 
 License
--------
+=======
 
 License pending.
